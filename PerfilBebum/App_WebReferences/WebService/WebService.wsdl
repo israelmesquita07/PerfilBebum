@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Perfil">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id_Doses" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PerfilResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PerfilResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Bebidas">
+        <s:complexType />
+      </s:element>
+      <s:element name="BebidasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BebidasResult" type="tns:ArrayOfBebidas" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBebidas">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Bebidas" nillable="true" type="tns:Bebidas" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Bebidas">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Conteudo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Doses">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id_Bebida" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DosesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DosesResult" type="tns:ArrayOfDosesDiarias" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDosesDiarias">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DosesDiarias" nillable="true" type="tns:DosesDiarias" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DosesDiarias">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuantidadeDose" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="PerfilSoapIn">
+    <wsdl:part name="parameters" element="tns:Perfil" />
+  </wsdl:message>
+  <wsdl:message name="PerfilSoapOut">
+    <wsdl:part name="parameters" element="tns:PerfilResponse" />
+  </wsdl:message>
+  <wsdl:message name="BebidasSoapIn">
+    <wsdl:part name="parameters" element="tns:Bebidas" />
+  </wsdl:message>
+  <wsdl:message name="BebidasSoapOut">
+    <wsdl:part name="parameters" element="tns:BebidasResponse" />
+  </wsdl:message>
+  <wsdl:message name="DosesSoapIn">
+    <wsdl:part name="parameters" element="tns:Doses" />
+  </wsdl:message>
+  <wsdl:message name="DosesSoapOut">
+    <wsdl:part name="parameters" element="tns:DosesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSoap">
+    <wsdl:operation name="Perfil">
+      <wsdl:input message="tns:PerfilSoapIn" />
+      <wsdl:output message="tns:PerfilSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Bebidas">
+      <wsdl:input message="tns:BebidasSoapIn" />
+      <wsdl:output message="tns:BebidasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Doses">
+      <wsdl:input message="tns:DosesSoapIn" />
+      <wsdl:output message="tns:DosesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Perfil">
+      <soap:operation soapAction="http://tempuri.org/Perfil" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bebidas">
+      <soap:operation soapAction="http://tempuri.org/Bebidas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Doses">
+      <soap:operation soapAction="http://tempuri.org/Doses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Perfil">
+      <soap12:operation soapAction="http://tempuri.org/Perfil" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bebidas">
+      <soap12:operation soapAction="http://tempuri.org/Bebidas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Doses">
+      <soap12:operation soapAction="http://tempuri.org/Doses" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService">
+    <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
+      <soap:address location="http://localhost:50204/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
+      <soap12:address location="http://localhost:50204/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
